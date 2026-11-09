@@ -1,0 +1,286 @@
+@import "reset.css";
+@import "font.css";
+
+:root {
+
+   --font-family: "Work Sans";
+   --font-size: 16px;
+   --font-weight: 400;
+
+   --background-colour: #24221f;
+   --text-colour: #F4F4F4;
+   --brand-colour: #ffc053;
+
+}
+
+html, body {
+
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    background-color: var(--background-colour);
+    color: var(--text-colour);
+    padding: 0;
+
+    * {
+        box-sizing: border-box;
+    }
+
+    a {
+
+        color: var(--text-colour);
+        text-decoration: none;
+
+    }
+
+}
+
+@keyframes load {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes showText {
+    0% { opacity: 0; translate: 0 8px; }
+    100% { opacity: 1; translate: 0 0; }
+}
+
+@keyframes pulse {
+    0% { opacity: .6; }
+    50% { opacity: 1; }
+    100% { opacity: .6; }
+}
+
+main {
+
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--background-colour);
+    border-radius: 8px;
+    opacity: 0;
+    animation: load .6s ease-out forwards;
+
+    header, footer {
+
+        position: absolute;
+        left: 0;
+        width: 100%;
+        padding: 16px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 2;
+        background-color: var(--background-colour);
+
+    }
+
+
+    /* Header */
+    header {
+        top: 0;
+
+        /* Logo */
+        a.logo {
+
+            display: block;
+            color: transparent;
+            text-decoration: none;
+            width: 96px;
+            height: 64px;
+            background-color: var(--brand-colour);
+            mask-image: url(../img/logo-jimbo.svg);
+            mask-repeat: no-repeat;
+            mask-position: center;
+            mask-size: contain;
+
+        }
+
+    }
+
+    /* Footer */
+    footer {
+        bottom: 0;
+
+        p.text {
+
+            font-size: 0.9rem;
+            opacity: .8;
+
+            a {
+                color: var(--brand-colour);
+                text-decoration: underline;
+            }
+
+        }
+
+    }
+
+    /* Content */
+    div.content {
+
+        width: 100%;
+        max-width: 1024px;
+        max-height: 800px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 44px;
+        align-items: center;
+        justify-content: center;
+
+        h1 {
+            font-size: 2.6rem;
+            text-align: center;
+            transition: translate ease-in-out .2s, opacity ease-in-out .2s;
+
+            &.-off {
+                opacity: 0;
+                translate: 0 -16px;
+            }
+
+            span {
+                color: var(--brand-colour);
+            }
+
+        }
+
+        div.conversation {
+
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: auto;
+            max-height: 640px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow-y: auto;
+
+            p {
+
+                font-size: 1.1rem;
+                opacity: 0;
+                translate: 0 8px;
+                animation: showText .2s ease-in-out forwards .1s;
+
+                &.user {
+
+                    align-self: flex-end;
+                    background-color: rgba(255,255,255,.1);
+                    padding: 16px 24px;
+                    border-radius: 8px;
+                    max-width: 640px;
+
+                }
+
+                &.response {
+                    margin: 44px 0;
+                    margin-left: 24px;
+                }
+
+            }
+
+        }
+
+        div.input {
+
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+
+            div.working {
+
+                position: absolute;
+                top: -80px;
+                left: 0;
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                margin-left: 24px;
+                transition: translate .15s ease-in-out, opacity .15s ease-in-out;
+                opacity: 1;
+                translate: 0 0;
+
+                &.-off {
+                    translate: 0 -8px;
+                    opacity: 0;
+                }
+
+                img {
+                    width: 24px;
+                }
+
+                p {
+                    translate: 0 0;
+                    animation: pulse 2s linear infinite;
+                }
+
+            }
+
+            p.small { font-size: 0.8rem; opacity: .6; }
+
+            textarea {
+                position: relative;
+                z-index: 1;
+                width: 100%;
+                min-height: 144px;
+                border-radius: 8px;
+                padding: 24px 32px;
+                resize: none;
+                font-size: 1.2rem;
+                background-color: rgba(0,0,0,.5);
+                border: 0;
+                color: var(--text-colour);
+                box-shadow: 0 16px 80px rgba(0,0,0,.2);
+                transition: outline ease-in-out .25s, opacity ease-in-out .25s;
+                outline: 1px solid transparent;
+
+                &:disabled { opacity: .4; }
+
+                &:focus-visible {
+                    outline: 1px solid var(--brand-colour);
+                    box-shadow: 0 16px 80px rgba(0,0,0,.4);
+                }
+
+            }
+
+            button {
+                position: absolute;
+                z-index: 2;
+                bottom: 0;
+                right: 0;
+                translate: -24px -60px;
+                font-size: 1.3rem;
+                padding: 8px 16px;
+                border: 0;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: scale ease-in-out .1s, opacity ease-in-out .25s, translate ease-in-out .25s;
+
+                &:hover { scale: 1.05; }
+                &:active { scale: .98; }
+
+                &:disabled { 
+                    pointer-events: none;
+                    opacity: 0;
+                    translate: 0 -60px;
+                }
+
+            }
+
+        }
+
+    }
+
+}
