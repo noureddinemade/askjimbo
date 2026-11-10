@@ -56,6 +56,7 @@ main {
     position: relative;
     width: 100%;
     height: 100vh;
+    height: 100dvh;
     padding: 16px;
     display: flex;
     flex-direction: column;
@@ -69,10 +70,7 @@ main {
 
     header, footer {
 
-        position: absolute;
-        left: 0;
-        width: 100%;
-        padding: 16px 0;
+        flex: 0 0 60px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -84,7 +82,6 @@ main {
 
     /* Header */
     header {
-        top: 0;
 
         /* Logo */
         a.logo {
@@ -106,7 +103,6 @@ main {
 
     /* Footer */
     footer {
-        bottom: 0;
 
         p.text {
 
@@ -123,19 +119,29 @@ main {
     }
 
     /* Content */
+
+    div.content:has(.conversation:empty) {
+        
+        justify-content: center;
+
+        .conversation { display: none; }
+
+    }
+
     div.content {
 
-        width: 100%;
-        max-width: 1024px;
-        max-height: 800px;
-        height: 100%;
+        flex: 1;
+        min-height: 0;
         display: flex;
         flex-direction: column;
+        width: 100%;
+        max-width: 1024px;
         gap: 44px;
         align-items: center;
         justify-content: center;
 
         h1 {
+            flex: 0 0 auto;
             font-size: 2.6rem;
             text-align: center;
             transition: translate ease-in-out .2s, opacity ease-in-out .2s;
@@ -153,15 +159,15 @@ main {
 
         div.conversation {
 
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
             position: relative;
             z-index: 1;
             width: 100%;
-            height: auto;
-            max-height: 640px;
             display: flex;
             flex-direction: column;
             gap: 16px;
-            overflow-y: auto;
 
             p {
 
@@ -191,6 +197,7 @@ main {
 
         div.input {
 
+            flex: 0 0 auto;
             width: 100%;
             position: relative;
             z-index: 2;
@@ -231,13 +238,17 @@ main {
             p.small { font-size: 0.8rem; opacity: .6; }
 
             textarea {
+
+                resize: none;
+                max-height: 240px;
+                overflow-y: auto;
+                field-sizing: content;
+
                 position: relative;
                 z-index: 1;
                 width: 100%;
-                min-height: 144px;
                 border-radius: 8px;
                 padding: 24px 32px;
-                resize: none;
                 font-size: 1.2rem;
                 background-color: rgba(0,0,0,.5);
                 border: 0;
@@ -260,7 +271,7 @@ main {
                 z-index: 2;
                 bottom: 0;
                 right: 0;
-                translate: -24px -60px;
+                translate: -24px -135%;
                 font-size: 1.3rem;
                 padding: 8px 16px;
                 border: 0;
@@ -274,7 +285,7 @@ main {
                 &:disabled { 
                     pointer-events: none;
                     opacity: 0;
-                    translate: 0 -60px;
+                    translate: 0 -135%;
                 }
 
             }

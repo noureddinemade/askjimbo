@@ -132,6 +132,11 @@ const addUserMessage = (message) => {
 
 //
 
+textarea.addEventListener('input', () => {
+    textarea.style.height = 'auto';
+    textarea.style.height = query.scrollHeight + 'px';
+});
+
 textarea.addEventListener('keyup', () => {
 
     let value = textarea.value.replaceAll('\n', '')
