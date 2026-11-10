@@ -104,6 +104,11 @@ main {
     /* Footer */
     footer {
 
+        width: 100%;
+        max-width: 1024px;
+        flex-direction: row;
+        justify-content: space-between;
+
         p.text {
 
             font-size: 0.9rem;
@@ -155,6 +160,50 @@ main {
                 color: var(--brand-colour);
             }
 
+        }
+
+        div.faq-item {
+
+            align-self: center;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 24px;
+            width: 100%;
+            max-width: 640px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255,255,255,.1);
+
+            &:first-of-type { margin-top: 44px; }
+
+            h2 { 
+                font-size: 1.8rem;
+                text-decoration: underline;
+            }
+
+            p {
+                opacity: .7;
+                font-size: 1.1rem;
+                line-height: 1.5;
+
+                span { color: var(--brand-colour); }
+            }
+
+        }
+
+        p {
+
+            &.small {
+                margin-top: 44px;
+                opacity: .6 !important;
+                font-size: .9rem !important;
+                text-align: center !important;
+            }
+
+            &.large {
+                font-size: 1.6rem;
+                text-align: center;
+            }
         }
 
         div.conversation {
